@@ -1,0 +1,18 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+    <main class="mainForm">
+        <form action="/signUp" method="POST">
+			<input type="text" placeholder="Name" name="name">
+			<input type="text" placeholder="Email" name="email">
+			<input type="password" placeholder="Password" name="password">
+            <input type="text" placeholder="Image URL" name="url"> 
+                <div class="formButton">
+				<button>Sign Up</button>
+				<p>Do you already have an account ?<a href="/logIn"> Log In</a></p>
+			</div>
+		</form>
+        <div class="photoContainer">
+            <img src="https://web-bigbox.storage.googleapis.com/bigbox/img/waving_man.png" alt="">
+        </div>
+    </main>
+    <%- include("partials/footer.ejs") %>

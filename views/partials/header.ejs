@@ -1,0 +1,19 @@
+<header>
+    <div class="title">
+        <h1>Algo</h1>
+        <h2>para regalar</h2>
+    </div>
+    <nav>
+        <a class="<%= title.includes('Home') ? 'active' : null %>" href="/" >Home</a>
+        <% if (!loggedIn) { %>
+            <a class="<%= title.includes('Sign') ? 'active' : null %>" href="/signUp">Sign Up</a>
+            <a class="<%= title.includes('Log') ? 'active' : null %>" href="/logIn">Log In</a>
+        <% } else if (admin) { %>
+            <a href="/logOut">Log Out</a>
+            <a class="<%= title.includes('New') ? 'active' : null %>" href="/newExperience">Add</a>
+        <% } else { %>
+            <a href="/logOut">Log Out</a>
+            <a class="<%= title.includes('Favourite') ? 'active' : null %>" href="/profile/<%=userId%>">Favs</a>
+        <% } %>
+    </nav>
+</header>

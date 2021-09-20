@@ -1,0 +1,35 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/header.ejs") %>
+<h2 class="welcomeProfile">Hi <%= name %>, here you'll find your favourite experiences</h2>
+<div class="cards">
+    <% experiences.forEach(experience => { %>
+        <% if (experience.likes.includes(userId)) { %>
+            <% let heart = experience.likes.includes(userId) ? "/assets/heartFull.svg" : "/assets/heart.svg" %>
+            <div class="present">
+                <div class="presentPicture" style="background-image: url(<%=experience.url%>);" >
+                </div>
+                <div class="info">
+                    <h4><%= experience.title %></h4>
+                    <% if(loggedIn) { %>
+                        <a href="/like?idUser=<%= userId %>&experienceId=<%= experience._id %>">
+                            <img src=<%= heart %> alt="heart" />
+                        </a>
+                    <% } %>    
+                </div>
+                <p><%= experience.description %></p>
+                
+                <div class="presentFooter">
+
+                    <p class="price"><%= experience.price %></p>
+                    <% if (loggedIn && admin) { %>
+                        <div class="actions">
+                            <a href="/deleteExperience/<%= experience._id %>"><img src="/assets/trash.svg" alt="delete" /></a>
+                            <a href="/editExperience/<%= experience._id %>"><img src="/assets/pencil.svg" alt="edit"></a>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    <% }) %>
+</div>
+<%- include("partials/footer.ejs") %>
