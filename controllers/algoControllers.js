@@ -12,8 +12,6 @@ const algoControllers = {
                 userId: req.session.userId,
                 name: null || req.session.name
             })
-    
-        // res.redirect("/unauthorized")
     },
         
     signUp: (req, res) => {
@@ -22,7 +20,8 @@ const algoControllers = {
         } else {
             res.render("signUp", {
                 title: "Sign Up",
-                loggedIn: req.session.loggedIn
+                loggedIn: req.session.loggedIn,
+                error: null
             })
         }
     },
@@ -33,25 +32,29 @@ const algoControllers = {
         } else {
             res.render("logIn", {
                 title: "Log In",
-                loggedIn: req.session.loggedIn,
-
+                loggedIn: req.session.loggedIn, 
+                error: null
             })
         }
     },
     
     profile: async (req, res) => {
-        const experiences = await Experience.find()
-        const experience = await Experience.findOne({_id: req.params._id})
-        res.render("profile", {
-            title: "Favourite Experiences",
-            loggedIn: req.session.loggedIn,
-            userId: req.session.userId,
-            name: req.session.name,
-            admin: req.session.admin,
-            edit: experience,
-            error: null,
-            experiences
-        })
+        if (!req.session.loggedIn) {
+            res.redirect("/")
+        } else {
+            const experiences = await Experience.find()
+            const experience = await Experience.findOne({_id: req.params._id})
+            res.render("profile", {
+                title: "Favourite Experiences",
+                loggedIn: req.session.loggedIn,
+                userId: req.session.userId,
+                name: req.session.name,
+                admin: req.session.admin,
+                edit: experience,
+                error: null,
+                experiences
+            })
+        }
     },
 
     newExperience: (req, res) => {
@@ -133,6 +136,7 @@ const algoControllers = {
                         admin: req.session.admin,
                         userId: req.session.userId,
                         name: null || req.session.name,
+                        error: null
                     }))
                 )
             } else {
@@ -146,6 +150,7 @@ const algoControllers = {
                         admin: req.session.admin,
                         userId: req.session.userId,
                         name: null || req.session.name,
+                        error: null
                     }))
                 )
             }
@@ -155,6 +160,15 @@ const algoControllers = {
             res.redirect("/")
         })
     },
+
+    unauthorized: (req, res) => {
+        res.render("unauthorized", {
+            title: "Unauthorized",
+            loggedIn: req.session.loggedIn,
+            userId: req.session.userId,
+            admin: false
+        })
+    }
 
 }
 

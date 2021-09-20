@@ -1,4 +1,10 @@
 <%- include("partials/head.ejs") %>
 <%- include("partials/header.ejs") %>
-<h2>You're unauthorized, to see our options log in</h2>
+<main class="unauthorized">
+    <% if (loggedIn) { %>
+        <h2>You're unauthorized to post on this website</h2>
+    <% } else { %>
+        <h2>You're unauthorized, to see our options log in</h2>
+    <% } %>
+</main>
 <%- include("partials/footer.ejs") %>

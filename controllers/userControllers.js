@@ -8,7 +8,7 @@ const userControllers = {
         let hashedPassword = bcryptjs.hashSync(password)
         let newUser = new User({name, email, password: hashedPassword, url, admin: admin === "on"})
         try {
-            let repeatedEmail = await User.findOne({email: email})
+            let repeatedEmail = await User.findOne({email})
             if (repeatedEmail) throw new Error ("This email is already in use")
             await newUser.save()
             req.session.loggedIn = true
@@ -16,10 +16,10 @@ const userControllers = {
             req.session.userId = newUser._id
             res.redirect("/")
         } catch (e) {
-            res.render("signUp", {
+            return res.render("signUp", {
                 title: "Sign Up", 
                 loggedIn: req.session.loggedIn,
-                error: error.message
+                error: "This email is already in use"
             })
         }
     },
@@ -40,10 +40,10 @@ const userControllers = {
             }
 
         } catch {
-            res.render("logIn", {
+           return res.render("logIn", {
                 title: "Log In", 
                 loggedIn: false, 
-                error: error.message
+                error: "Email and/or password incorrect"
             })
         }
     },

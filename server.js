@@ -22,6 +22,5 @@ app.use(session({
     store: myStore
 }))
 app.use("/", linkControllers.checkURL, router)
-app.use("/", router)
 
 app.listen(process.env.PORT, process.env.HOST || '0.0.0.0', () => console.log("Server listening"))

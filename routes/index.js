@@ -19,12 +19,7 @@ router.route("/newExperience")
 .get(algoControllers.newExperience)
 
 router.route("/unauthorized")
-.get((req, res) => {
-    res.render("unauthorized", {
-        title: "Unauthorized",
-        loggedIn: req.session.loggedIn
-    })
-})
+.get(algoControllers.unauthorized)
 
 router.route("/logOut")
 .get(userControllers.logOut)

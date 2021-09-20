@@ -26,12 +26,12 @@
                         </div>
                         <div class="info">
                             <h4><%= experience.title %></h4>
-                            <% if(loggedIn) { %>
+                            <% if(loggedIn || admin) { %>
                                 <a href="/like?idUser=<%= userId %>&experienceId=<%= experience._id %>">
                                     <img src=<%= heart %> alt="heart" />
                                 </a>
                             <% } else { %>
-                                <img src="/assets/heart.svg" alt="heart" />
+                                <img src="/assets/heart.svg" alt="heart"  onclick="alert()" id="alert" class="heart"/>
                             <% } %>
                         </div>
                         <p><%= experience.description %></p>
@@ -57,4 +57,18 @@
                 </button>
             <% } %>
     </main>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script>
+        function alert(){
+            alertify.warning("You must be logged")  
+        //     let notification = document.getElementById("alert")
+        //     notification.innerHTML= `<h5>You must be logged</h5>
+        //     <button onclick="accept()">OK</button> `
+        // }
+        // function accept(){
+        //     let notification=document.getElementById("alert")
+
+        }
+    
+    </script>
 <%- include("partials/footer.ejs") %>

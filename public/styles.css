@@ -13,6 +13,19 @@ header {
     background-color: rgba(2, 255, 255, 0.445);
 }
 
+div.logoTitle {
+    display: flex;
+    align-items: center;
+}
+
+div.logoContainer {
+    background-image: url("https://i.postimg.cc/PJJsZ4Gd/gift.png");
+    background-position: center;
+    background-size: cover;
+    width: 8rem;
+    height: 8rem;
+}
+
 div.title h1{
     font-size: 7vmin;
 }
@@ -114,6 +127,10 @@ div.present p.price {
     /* revisar */
 }
 
+img.heart {
+    cursor: pointer;
+}
+
 div.presentFooter {
     display: flex;
     justify-content: space-between;
@@ -185,9 +202,10 @@ div.formButton{
     margin-top: 15px;
 }
 
-div.formButton a{
+.linkForm {
+    font-weight: bold;
     text-decoration: none;
-    color: rgba(2, 255, 255, 0.589);
+    color: rgb(2, 255, 255);
 }
 
 div.formButton button{
@@ -200,6 +218,11 @@ div.formButton button{
     margin-bottom: 5px;
     border-radius: 10px;
     font-size: 2vmin;
+}
+
+form h3.error {
+    margin-bottom: 1rem;
+    color: rgb(222, 16, 88);
 }
 
 main.mainForm{
@@ -235,3 +258,14 @@ p.seeAll {
     margin-top: 1.5rem;
 }
 
+div.alert {
+    position: absolute;
+}
+
+main.unauthorized {
+    display: flex;
+    justify-content: center;
+    padding: 4.5rem;
+    flex: 1;
+    min-height: 60vh;
+}
