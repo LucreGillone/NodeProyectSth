@@ -271,7 +271,13 @@ main.unauthorized {
 }
 
 @media screen and (max-width:1200px) {
-    div.photoContainer {
+    div.photoContainer img{
         width: 450px;
+    }
+}
+
+@media screen and (max-width:950px) {
+    main.mainForm {
+        flex-direction: column;
     }
 }
