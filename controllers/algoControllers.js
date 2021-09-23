@@ -168,6 +168,29 @@ const algoControllers = {
             userId: req.session.userId,
             admin: false
         })
+    },
+
+    likeDislikeExp: (req,res) => {
+        Experience.findOne({_id:req.params.experienceId})
+        .then((experience)=>{
+            if(experience.likes.includes(req.params.userId)){
+                Experience.findOneAndUpdate({_id:req.params.experienceId},{$pull:{likes:req.params.userId}})
+                .then(()=>{
+                    res.json({success:true,like:false})
+                    
+                })
+            }else{
+                Experience.findOneAndUpdate({_id:req.params.experienceId},{$push:{likes:req.params.userId}})
+                .then(()=>{
+                    res.json({success:true,like:true})
+                })
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+            //error
+        })
+       
     }
 
 }

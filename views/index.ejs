@@ -19,7 +19,7 @@
           <% if (experiences.length === 0) { %>
             <h3>We don't have any experiences yet!</h3>
             <% } else { %>
-                <% experiences.forEach(experience => { %>
+                <% experiences.forEach((experience, index) => { %>
                     <% let heart = experience.likes.includes(userId) ? "/assets/heartFull.svg" : "/assets/heart.svg" %>
                     <div class="present">
                         <div class="presentPicture" style="background-image: url(<%=experience.url%>);" >
@@ -27,9 +27,8 @@
                         <div class="info">
                             <h4><%= experience.title %></h4>
                             <% if(loggedIn || admin) { %>
-                                <a href="/like?idUser=<%= userId %>&experienceId=<%= experience._id %>">
-                                    <img src=<%= heart %> alt="heart" />
-                                </a>
+                                <%let heartLike=`heart${index}`%>
+                                <img src=<%= heart %> alt="heart" onclick="like('<%=userId%>','<%=experience._id%>' , '<%=heartLike%>')" id="<%=heartLike%>"/>
                             <% } else { %>
                                 <img src="/assets/heart.svg" alt="heart"  onclick="alert()" id="alert" class="heart"/>
                             <% } %>
@@ -61,14 +60,22 @@
     <script>
         function alert(){
             alertify.warning("You must be logged")  
-        //     let notification = document.getElementById("alert")
-        //     notification.innerHTML= `<h5>You must be logged</h5>
-        //     <button onclick="accept()">OK</button> `
-        // }
-        // function accept(){
-        //     let notification=document.getElementById("alert")
-
         }
-    
+        function like(userId,experienceId,heartLike){
+            fetch(`/likes/${userId}/${experienceId}`,{
+                method:'PUT'
+            })
+            .then(res=>res.json())
+            .then(response=>{
+                let img = document.getElementById(heartLike)
+                    
+                if(response.success && response.like){
+                    img.src="/assets/heartFull.svg"         
+                }else{
+                    img.src="/assets/heart.svg"
+                }
+            })
+            .catch((error)=> console.log(error))
+        } 
     </script>
 <%- include("partials/footer.ejs") %>

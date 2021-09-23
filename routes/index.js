@@ -36,4 +36,7 @@ router.route("/profile/:_id")
 router.route("/like")
 .get(algoControllers.likeExperence)
 
+router.route("/likes/:userId/:experienceId")
+.put(algoControllers.likeDislikeExp)
+
 module.exports = router
