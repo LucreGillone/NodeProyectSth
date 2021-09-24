@@ -1,14 +1,20 @@
 const express = require("express")
 const router = require("./routes/index")
 const session = require("express-session")
-const mongo = require("connect-mongodb-session")(session)
+const Sequelize = require("sequelize")
+const database = require("./config/database")
 require("dotenv").config()
-const linkControllers = require("./controllers/linkControllers")
-const myStore = new mongo({
-   uri: process.env.MONGODB,
-   collection: "sessions",
+const SequelizeStore = require("connect-session-sequelize")(session.Store)
+const User = require("./models/User")
+const Experience = require("./models/Experience")
+
+Experience.belongsTo(User)
+User.hasMany(Experience)
+
+const myStore = new SequelizeStore({
+    db: database
 })
-require ("./config/database")
+const linkControllers = require("./controllers/linkControllers")
 
 const app = express()
 
@@ -17,10 +23,17 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({extended: true}))
 app.use(session({
     secret: process.env.SECRET,
+    store: myStore,
     resave: false, 
     saveUninitialized: false,
-    store: myStore
+    proxy: true,
 }))
-app.use("/", linkControllers.checkURL, router)
+myStore.sync()
 
-app.listen(process.env.PORT, process.env.HOST || '0.0.0.0', () => console.log("Server listening"))
+
+database.sync()
+.then(()=>{
+    app.use("/", linkControllers.checkURL, router)
+	app.listen(4000, () => console.log("Server listening"))
+
+})

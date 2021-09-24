@@ -11,7 +11,7 @@
                 <div class="info">
                     <h4><%= experience.title %></h4>
                     <% if(loggedIn) { %>
-                        <a href="/like?idUser=<%= userId %>&experienceId=<%= experience._id %>">
+                        <a href="/like?idUser=<%=userId%>&experienceId=<%=experience.id%>">
                             <img src=<%= heart %> alt="heart" />
                         </a>
                     <% } %>    
@@ -23,8 +23,8 @@
                     <p class="price"><%= experience.price %></p>
                     <% if (loggedIn && admin) { %>
                         <div class="actions">
-                            <a href="/deleteExperience/<%= experience._id %>"><img src="/assets/trash.svg" alt="delete" /></a>
-                            <a href="/editExperience/<%= experience._id %>"><img src="/assets/pencil.svg" alt="edit"></a>
+                            <a href="/deleteExperience/<%= experience.id %>"><img src="/assets/trash.svg" alt="delete" /></a>
+                            <a href="/editExperience/<%= experience.id %>"><img src="/assets/pencil.svg" alt="edit"></a>
                         </div>
                     <% } %>
                 </div>

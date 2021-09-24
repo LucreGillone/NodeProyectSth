@@ -24,19 +24,19 @@ router.route("/unauthorized")
 router.route("/logOut")
 .get(userControllers.logOut)
 
-router.route("/deleteExperience/:_id")
+router.route("/deleteExperience/:id")
 .get(algoControllers.deleteExperience)
 
-router.route("/editExperience/:_id")
+router.route("/editExperience/:id")
 .get(algoControllers.editExperience)
 
-router.route("/profile/:_id")
+router.route("/profile/:id")
 .get(algoControllers.profile)
 
-router.route("/like")
-.get(algoControllers.likeExperence)
+// router.route("/like")
+// .get(algoControllers.likeExperence)
 
-router.route("/likes/:userId/:experienceId")
-.put(algoControllers.likeDislikeExp)
+// router.route("/likes/:userId/:experienceId")
+// .put(algoControllers.likeDislikeExp)
 
 module.exports = router

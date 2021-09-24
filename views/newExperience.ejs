@@ -8,7 +8,7 @@
         <input type="text" placeholder="Description" name="description" value="<%= edit ? edit.description : "" %>" required>
         <input type="text" placeholder="Url" name="url" value="<%= edit ? edit.url : "" %>" required>
         <input type="text" placeholder="Price" name="price" value="<%= edit ? edit.price : "" %>" required>
-        <input type="hidden" name="_id" value="<%= edit ? edit._id : "" %>" >
+        <input type="hidden" name="id" value="<%= edit ? edit.id : "" %>" >
         <div class="formButton">
             <button>Send</button>
             <p class="seeAll">See all<a href="/" class="linkForm"> Home</a></p>
@@ -16,9 +16,9 @@
         <% if (error) { %>
             <h1><%= error %></h1>
         <% } %>
-        </form>
-        <div class="photoContainer">
-            <img src="https://www.bigbox.com.ar/static/dist/ecommerce/Ilus1ComoFunciona.80c79ab649797f6150947cb699e7ea1d.png" alt="">
-        </div>
+    </form>
+    <div class="photoContainer">
+        <img src="https://www.bigbox.com.ar/static/dist/ecommerce/Ilus1ComoFunciona.80c79ab649797f6150947cb699e7ea1d.png" alt="">
+    </div>
 </main>
 <%- include("partials/footer.ejs") %>

@@ -20,27 +20,21 @@
             <h3>We don't have any experiences yet!</h3>
             <% } else { %>
                 <% experiences.forEach((experience, index) => { %>
-                    <% let heart = experience.likes.includes(userId) ? "/assets/heartFull.svg" : "/assets/heart.svg" %>
+                    
                     <div class="present">
                         <div class="presentPicture" style="background-image: url(<%=experience.url%>);" >
                         </div>
                         <div class="info">
                             <h4><%= experience.title %></h4>
-                            <% if(loggedIn || admin) { %>
-                                <%let heartLike=`heart${index}`%>
-                                <img src=<%= heart %> alt="heart" onclick="like('<%=userId%>','<%=experience._id%>' , '<%=heartLike%>')" id="<%=heartLike%>"/>
-                            <% } else { %>
-                                <img src="/assets/heart.svg" alt="heart"  onclick="alert()" id="alert" class="heart"/>
-                            <% } %>
                         </div>
                         <p><%= experience.description %></p>
                         <div class="presentFooter">
 
-                            <p class="price"><%= experience.price %></p>
-                            <% if (loggedIn && admin) { %>
+                            <p class="price">$<%= experience.price %></p>
+                            <% if (loggedIn) { %>
                                 <div class="actions">
-                                    <a href="/deleteExperience/<%= experience._id %>"><img src="/assets/trash.svg" alt="delete" /></a>
-                                    <a href="/editExperience/<%= experience._id %>"><img src="/assets/pencil.svg" alt="edit"></a>
+                                    <a href="/deleteExperience/<%= experience.id %>"><img src="/assets/trash.svg" alt="delete" /></a>
+                                    <a href="/editExperience/<%= experience.id %>"><img src="/assets/pencil.svg" alt="edit"></a>
                                 </div>
                             <% } %>
                         </div>
@@ -48,7 +42,7 @@
                 <% }) %>
                 <% } %> 
             </div>
-            <% if (loggedIn && admin) { %>
+            <% if (loggedIn) { %>
                 <button class="newExperience">
                     <a href="/newExperience"> 
                         Add experience
@@ -57,7 +51,7 @@
             <% } %>
     </main>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script>
+    <!-- <script>
         function alert(){
             alertify.warning("You must be logged")  
         }
@@ -77,5 +71,5 @@
             })
             .catch((error)=> console.log(error))
         } 
-    </script>
+    </script> -->
 <%- include("partials/footer.ejs") %>

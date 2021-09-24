@@ -1,5 +1,7 @@
-const mongoose = require("mongoose")
+const Sequelize = require("sequelize")
+const database = new Sequelize("something", "root", "", {
+    host: "localhost", 
+    dialect: "mysql"
+})
 
-mongoose.connect(process.env.MONGODB)
-.then(() => console.log("Database connected"))
-.catch(e => console.log(e))
+module.exports = database
